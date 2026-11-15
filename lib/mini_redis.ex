@@ -1,0 +1,2 @@
+defmodule MiniRedis do
+end
