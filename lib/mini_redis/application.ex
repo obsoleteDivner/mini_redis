@@ -3,7 +3,10 @@ defmodule MiniRedis.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [MiniRedis.Server]
+    children = [
+      {DynamicSupervisor, strategy: :one_for_one, name:  MiniRedis.ConnectionSupervisor},
+      MiniRedis.Server
+    ]
 
     opts = [strategy: :one_for_one, name: MiniRedis.Supervisor]
     Supervisor.start_link(children, opts)
