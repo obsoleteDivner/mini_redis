@@ -8,7 +8,8 @@ defmodule MiniRedis.Server do
 	def init(state) do
 		{:ok, socket} = state
 		|> Map.get(:port)
-		|> :gen_tcp.listen([:binary, packet: :line, active: false, reuseaddr: true])
+		|> :gen_tcp.listen([:binary, packet: :line, ip: {127, 0, 0, 1}, active: false, reuseaddr: true])
     {:ok, Map.put(state, :socket, socket)}
   end
+	
 end
